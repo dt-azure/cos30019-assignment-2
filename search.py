@@ -40,19 +40,46 @@ def parse_input(path):
         return graph, coords, origin, goals
 
 if __name__ == "__main__":
+    search_algos = {
+        "bfs": "Breadth First Search", 
+        "dfs": "Depth First Search",
+        "gbfs": "Greedy Best First Search",
+        "a_star": "A* (A-star)",
+        "cus1": "Custom 1",
+        "ida_star": "Iterative Deepening A*"
+    }
+
     if len(sys.argv) != 3:
         print("Please follow this format: python search.py <filename> <method>")
         print("<filename>: name of the input file")
-        print("<method>: bfs, dfs, gbfs, a_star, cus1, cus2")
-    
+        print("<method>: bfs, dfs, gbfs, a_star, cus1, ida_star")
+        exit()
+
+    _, path, search_algo = sys.argv
+
+    if search_algo not in search_algos.keys():
+        print("Invalid search algorithm. Please choose one from this list: bfs, dfs, gbfs, a_star, cus1, ida_star.")
+        exit()
+
     try:
-        graph, coords, origin, goals = parse_input("test_case_4.txt")
-
-        problem = GraphProblemMultiDest(origin, goals, graph, coords)
-        result, path, nodes_created = ida_star_search(problem)
-        print(f"{result if result else "No solution found."}")
-        print(path)
-        print(nodes_created)
-
+        graph, coords, origin, goals = parse_input(path)
     except FileNotFoundError:
         print("Input file does not exist. Please try again.")
+
+    if search_algo == "bfs":
+        pass
+    elif search_algo == "dfs":
+        pass
+    elif search_algo == "gbfs":
+        pass
+    elif search_algo == "a_star":
+        pass
+    elif search_algo == "cus1":
+        pass
+    elif search_algo == "ida_star":
+        problem = GraphProblemMultiDest(origin, goals, graph, coords)
+        result, result_path, nodes_created = ida_star_search(problem)
+
+    print(f"{path} {search_algos[search_algo]}")
+    print(f"{result if result else "No solution found"} {nodes_created}")
+    print(f"{result_path if result_path else [ ]}")
