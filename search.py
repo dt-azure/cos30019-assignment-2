@@ -1,6 +1,7 @@
 import sys
 from setup import Graph, GraphProblemMultiDest
 from iterative_deepening_a_star import ida_star_search
+from uninformed_search import bfs, dfs
 
 def parse_input(path):
     flag = None
@@ -66,10 +67,12 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print("Input file does not exist. Please try again.")
 
+    problem = GraphProblemMultiDest(origin, goals, graph, coords)
+
     if search_algo == "bfs":
-        pass
+        result, result_path, nodes_created = bfs(problem)
     elif search_algo == "dfs":
-        pass
+        result, result_path, nodes_created = dfs(problem)
     elif search_algo == "gbfs":
         pass
     elif search_algo == "a_star":
@@ -77,7 +80,6 @@ if __name__ == "__main__":
     elif search_algo == "cus1":
         pass
     elif search_algo == "ida_star":
-        problem = GraphProblemMultiDest(origin, goals, graph, coords)
         result, result_path, nodes_created = ida_star_search(problem)
 
     print(f"{path} {search_algos[search_algo]}")
