@@ -46,19 +46,11 @@ if __name__ == "__main__":
         print("<method>: bfs, dfs, gbfs, a_star, cus1, cus2")
     
     try:
-        graph, coords, origin, goals = parse_input("sample_input.txt")
-        # print(graph.nodes())
-        
-        # print(graph.get(2, 1))
-        # print(graph.get(4, 1))
-        # print(graph.get(5, 4))
+        graph, coords, origin, goals = parse_input("test_case_4.txt")
 
-        # print(coords)
-        # print(origin)
-        print(goals)
         problem = GraphProblemMultiDest(origin, goals, graph, coords)
         result, path, nodes_created = ida_star_search(problem)
-        print(result)
+        print(f"{result if result else "No solution found."}")
         print(path)
         print(nodes_created)
 
