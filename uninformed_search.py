@@ -4,7 +4,8 @@ from setup import Node
 def bfs(problem):
     Node.nodes_created = 0
     frontier = deque([Node(problem.initial)])
-    visisted = set(problem.initial)
+    visisted = set()
+    visisted.add(problem.initial)
 
     while frontier:
         node = frontier.popleft()
