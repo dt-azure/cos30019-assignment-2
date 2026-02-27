@@ -77,7 +77,7 @@ if __name__ == "__main__":
     elif search_algo == "gbfs":
         pass
     elif search_algo == "a_star":
-        results, result_path, nodes_created = a_star_search(problem)
+        result, result_path, nodes_created = a_star_search(problem)
     elif search_algo == "cus1":
         pass
     elif search_algo == "ida_star":
