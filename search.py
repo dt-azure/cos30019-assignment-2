@@ -2,6 +2,7 @@ import sys
 from setup import Graph, GraphProblemMultiDest
 from iterative_deepening_a_star import ida_star_search
 from uninformed_search import bfs, dfs
+from astar_search import a_star_search
 
 def parse_input(path):
     flag = None
@@ -76,7 +77,7 @@ if __name__ == "__main__":
     elif search_algo == "gbfs":
         pass
     elif search_algo == "a_star":
-        pass
+        results, result_path, nodes_created = a_star_search(problem)
     elif search_algo == "cus1":
         pass
     elif search_algo == "ida_star":
