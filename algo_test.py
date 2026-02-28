@@ -67,6 +67,8 @@ if __name__ == "__main__":
             exit()
         else:
             test_algos(path)
+            print("\n")
+            print ("\n")
 
 
 
