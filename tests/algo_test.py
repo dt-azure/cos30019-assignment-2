@@ -1,9 +1,8 @@
-from search import parse_input
-from setup import Graph, GraphProblemMultiDest
-from uninformed_search import bfs, dfs
-from informed_search import a_star_search, gbfs
-from iterative_deepening_a_star import ida_star_search
-from iterative_deepening_dfs import iddfs_2
+from utils.setup import parse_input, GraphProblemMultiDest
+from algorithms.uninformed_search import bfs, dfs
+from algorithms.informed_search import a_star_search, gbfs
+from algorithms.iterative_deepening_a_star import ida_star_search
+from algorithms.iterative_deepening_dfs import iddfs_2
 
 search_algos = {
         "bfs": "Breadth First Search", 
