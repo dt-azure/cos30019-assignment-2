@@ -2,7 +2,7 @@ import sys
 from setup import Graph, GraphProblemMultiDest
 from iterative_deepening_a_star import ida_star_search
 from uninformed_search import bfs, dfs
-from astar_search import a_star_search
+from informed_search import a_star_search
 
 def parse_input(path):
     flag = None
@@ -64,9 +64,10 @@ if __name__ == "__main__":
         exit()
 
     try:
-        graph, coords, origin, goals = parse_input(path)
+        graph, coords, origin, goals = parse_input(f"test_cases/{path}")
     except FileNotFoundError:
         print("Input file does not exist. Please try again.")
+        exit()
 
     problem = GraphProblemMultiDest(origin, goals, graph, coords)
 
