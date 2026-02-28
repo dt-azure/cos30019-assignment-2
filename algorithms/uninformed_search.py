@@ -1,6 +1,7 @@
 from collections import deque
 from utils.setup import Node
 
+# Implementation of BFS
 def bfs(problem):
     Node.nodes_created = 0
     frontier = deque([Node(problem.initial)])
@@ -26,6 +27,7 @@ def bfs(problem):
 
     return None, None, Node.nodes_created
 
+# Implementation of DFS
 def dfs(problem):
     Node.nodes_created = 0
     frontier = [Node(problem.initial)]
