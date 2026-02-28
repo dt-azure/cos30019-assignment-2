@@ -1,8 +1,9 @@
 from search import parse_input
 from setup import Graph, GraphProblemMultiDest
-from iterative_deepening_a_star import ida_star_search
 from uninformed_search import bfs, dfs
-from informed_search import a_star_search
+from informed_search import a_star_search, gbfs
+from iterative_deepening_a_star import ida_star_search
+from iterative_deepening_dfs import iddfs_2
 
 search_algos = {
         "bfs": "Breadth First Search", 
@@ -34,11 +35,11 @@ def test_algos(path):
     print(f"{result_path if result_path else [ ]}")
     print("___________________")
 
-    # result, result_path, nodes_created = gbfs(problem)
-    # print(f"{path} GBFS")
-    # print(f"{result if result else "No solution found"} {nodes_created}")
-    # print(f"{result_path if result_path else [ ]}")
-    # print("___________________")
+    result, result_path, nodes_created = gbfs(problem)
+    print(f"{path} GBFS")
+    print(f"{result if result else "No solution found"} {nodes_created}")
+    print(f"{result_path if result_path else [ ]}")
+    print("___________________")
 
     result, result_path, nodes_created = a_star_search(problem)
     print(f"{path} A*")
@@ -46,11 +47,11 @@ def test_algos(path):
     print(f"{result_path if result_path else [ ]}")
     print("___________________")
 
-    # result, result_path, nodes_created = bfs(problem)
-    # print(f"{path} {search_algos[search_algo]}")
-    # print(f"{result if result else "No solution found"} {nodes_created}")
-    # print(f"{result_path if result_path else [ ]}")
-    # print("___________________")
+    result, result_path, nodes_created = iddfs_2(problem)
+    print(f"{path} IDDFS")
+    print(f"{result if result else "No solution found"} {nodes_created}")
+    print(f"{result_path if result_path else [ ]}")
+    print("___________________")
 
     result, result_path, nodes_created = ida_star_search(problem)
     print(f"{path} IDA*")

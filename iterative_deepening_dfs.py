@@ -161,9 +161,9 @@ def iddfs_2(problem):
             while temp:
                 path.append(temp.state)
                 temp = temp.parent
-            return result, total_nodes_created, path[::-1]
+            return result, path[::-1], total_nodes_created
 
-    return None, total_nodes_created, []
+    return None, None, Node.nodes_created
 
 def depth_limited_dfs_2(problem, depth_limit):
     origin_node = Node(problem.initial)
