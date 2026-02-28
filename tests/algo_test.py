@@ -7,7 +7,7 @@ search_algos = {
         "dfs": "Depth First Search",
         "gbfs": "Greedy Best First Search",
         "a_star": "A* (A-star)",
-        "cus1": "Custom 1",
+        "iddfs": "Iterative Deepening Depth First Search",
         "ida_star": "Iterative Deepening A*"
     }
 
@@ -65,7 +65,6 @@ if __name__ == "__main__":
         else:
             test_algos(path)
             print("\n")
-            print ("\n")
 
 
 
