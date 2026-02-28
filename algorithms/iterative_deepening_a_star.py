@@ -1,4 +1,4 @@
-from setup import Node
+from utils.setup import Node
 import math
 
 

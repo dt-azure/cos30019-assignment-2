@@ -1,4 +1,4 @@
-from utils import *
+from utils.utils import *
 
 
 class Problem:
@@ -223,3 +223,39 @@ class GraphProblemMultiDest(GraphProblem):
         return min([euclidean_distance(self.coords[node.state], self.coords[goal]) for goal in self.goal])
         
     
+def parse_input(path):
+    flag = None
+    graph = Graph()
+    coords = {}
+    origin = None
+    goals = set()
+
+    with open(path) as input_file:
+        for line in input_file:
+            line = line.strip()
+
+            if line == "Nodes:":
+                flag = "nodes"
+            elif line == "Edges:":
+                flag = "edges"
+            elif line == "Origin:":
+                flag = "origin"
+            elif line == "Destinations:":
+                flag = "dests"
+            elif line == "":
+                continue
+            else:
+                if flag == "nodes":
+                    node, node_coords = line.split(": ")
+                    x, y = map(int, node_coords[1:-1].split(","))
+                    coords[int(node)] = (x, y)
+                elif flag == "edges":
+                    nodes, cost = line.split(": ")
+                    start, end = map(int, nodes[1:-1].split(","))
+                    graph.connect(start, end, int(cost))
+                elif flag == "origin":
+                    origin = int(line)
+                elif flag == "dests":
+                    goals = list(map(int, line.split("; ")))
+
+        return graph, coords, origin, goals

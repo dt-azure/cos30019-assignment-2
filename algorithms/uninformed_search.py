@@ -1,5 +1,5 @@
 from collections import deque
-from setup import Node
+from utils.setup import Node
 
 def bfs(problem):
     Node.nodes_created = 0

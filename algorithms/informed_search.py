@@ -1,6 +1,5 @@
-from setup import Node
-from utils import euclidean_distance
-from utils import PriorityQueue
+from utils.setup import Node
+from utils.utils import euclidean_distance, PriorityQueue
 import heapq
 
 

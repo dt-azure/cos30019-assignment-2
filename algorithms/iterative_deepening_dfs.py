@@ -1,4 +1,4 @@
-from setup import Node
+from utils.setup import Node
 
 # Each point/place in the graph is analysed as a node
 # Each node has a state (its ID)
