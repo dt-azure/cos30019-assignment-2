@@ -86,4 +86,4 @@ def gbfs(problem):
                 push(child)
                 frontier_states.add(child.state)
 
-    return None
+    return None, None, Node.nodes_created

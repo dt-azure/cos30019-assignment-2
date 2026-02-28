@@ -2,7 +2,7 @@ import sys
 from setup import Graph, GraphProblemMultiDest
 from iterative_deepening_a_star import ida_star_search
 from uninformed_search import bfs, dfs
-from informed_search import a_star_search
+from informed_search import a_star_search, gbfs
 from iterative_deepening_dfs import iddfs_2
 
 def parse_input(path):
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     elif search_algo == "dfs":
         result, result_path, nodes_created = dfs(problem)
     elif search_algo == "gbfs":
-        pass
+        result, result_path, nodes_created = gbfs(problem)
     elif search_algo == "a_star":
         result, result_path, nodes_created = a_star_search(problem)
     elif search_algo == "iddfs":
