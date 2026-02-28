@@ -1,6 +1,7 @@
 from setup import Node
 from utils import euclidean_distance
 from utils import PriorityQueue
+import heapq
 
 
 def a_star_search(problem):
@@ -41,3 +42,48 @@ def a_star_search(problem):
 
     return None, None, Node.nodes_created
 
+def gbfs(problem):
+
+    Node.nodes_created = 0
+    start = Node(problem.initial)
+
+    frontier = []
+    insertion_order = 0
+
+    def push(node):
+        nonlocal insertion_order
+        heapq.heappush(
+            frontier,
+            (problem.h(node), node.state, insertion_order, node)
+        )
+        insertion_order += 1
+
+    push(start)
+
+    explored = set()
+    frontier_states = {start.state}
+
+    while frontier:
+        _, _, _, node = heapq.heappop(frontier)
+        frontier_states.remove(node.state)
+
+        if problem.goal_test(node.state):
+            result_path = []
+            result = node
+
+            while node:
+                result_path.append(node.state)
+                node = node.parent
+            return result, result_path[::-1], Node.nodes_created
+
+        explored.add(node.state)
+
+        children = node.expand(problem)
+        children.sort(key=lambda n: n.state)
+
+        for child in children:
+            if child.state not in explored and child.state not in frontier_states:
+                push(child)
+                frontier_states.add(child.state)
+
+    return None
