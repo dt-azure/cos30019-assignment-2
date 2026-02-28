@@ -3,6 +3,7 @@ from setup import Graph, GraphProblemMultiDest
 from iterative_deepening_a_star import ida_star_search
 from uninformed_search import bfs, dfs
 from informed_search import a_star_search
+from iterative_deepening_dfs import iddfs_2
 
 def parse_input(path):
     flag = None
@@ -47,14 +48,14 @@ if __name__ == "__main__":
         "dfs": "Depth First Search",
         "gbfs": "Greedy Best First Search",
         "a_star": "A* (A-star)",
-        "cus1": "Custom 1",
+        "cus1": "Iterarive Deepening Depth First Search",
         "ida_star": "Iterative Deepening A*"
     }
 
     if len(sys.argv) != 3:
         print("Please follow this format: python search.py <filename> <method>")
-        print("<filename>: name of the input file")
-        print("<method>: bfs, dfs, gbfs, a_star, cus1, ida_star")
+        print("<filename>: name of the input file. Input file must be inside the test_cases folder.")
+        print("<method>: bfs, dfs, gbfs, a_star, iddfs, ida_star")
         exit()
 
     _, path, search_algo = sys.argv
@@ -79,8 +80,8 @@ if __name__ == "__main__":
         pass
     elif search_algo == "a_star":
         result, result_path, nodes_created = a_star_search(problem)
-    elif search_algo == "cus1":
-        pass
+    elif search_algo == "iddfs":
+        result, result_path, nodes_created = iddfs_2(problem)
     elif search_algo == "ida_star":
         result, result_path, nodes_created = ida_star_search(problem)
 

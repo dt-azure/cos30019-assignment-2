@@ -4,7 +4,7 @@ from search import parse_input
 from setup import Graph, GraphProblemMultiDest
 from iterative_deepening_a_star import ida_star_search
 from uninformed_search import bfs, dfs
-from astar_search import a_star_search
+from informed_search import a_star_search
 import numpy as np
 
 def test_algo(path):

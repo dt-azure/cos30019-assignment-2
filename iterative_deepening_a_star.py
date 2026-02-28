@@ -1,7 +1,5 @@
 from setup import Node
 import math
-from utils import euclidean_distance
-
 
 
 def ida_star_search(problem):
