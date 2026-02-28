@@ -48,14 +48,15 @@ if __name__ == "__main__":
         "dfs": "Depth First Search",
         "gbfs": "Greedy Best First Search",
         "a_star": "A* (A-star)",
-        "cus1": "Iterarive Deepening Depth First Search",
+        "iddfs": "Iterarive Deepening Depth First Search",
         "ida_star": "Iterative Deepening A*"
     }
 
     if len(sys.argv) != 3:
         print("Please follow this format: python search.py <filename> <method>")
-        print("<filename>: name of the input file. Input file must be inside the test_cases folder.")
+        print("<filename>: name of the input file (without extension). Input file must be a txt file and must be inside the test_cases folder.")
         print("<method>: bfs, dfs, gbfs, a_star, iddfs, ida_star")
+        print("Example: python search.py test_case_1 bfs")
         exit()
 
     _, path, search_algo = sys.argv
@@ -65,7 +66,7 @@ if __name__ == "__main__":
         exit()
 
     try:
-        graph, coords, origin, goals = parse_input(f"test_cases/{path}")
+        graph, coords, origin, goals = parse_input(f"test_cases/{path}.txt")
     except FileNotFoundError:
         print("Input file does not exist. Please try again.")
         exit()

@@ -16,7 +16,7 @@ search_algos = {
 
 def test_algos(path):
     try:
-        graph, coords, origin, goals = parse_input(f"test_cases/{path}")
+        graph, coords, origin, goals = parse_input(f"test_cases/{path}.txt")
     except FileNotFoundError:
         print("Input file does not exist. Please try again.")
         return
