@@ -4,8 +4,8 @@ from algorithms.uninformed_search import bfs, dfs, iddfs_2
 from algorithms.informed_search import a_star_search, gbfs, ida_star_search
 
 search_algos = {
-        "bfs": "Breadth First Search", 
-        "dfs": "Depth First Search",
+        "bfs": "Breadth-First Search", 
+        "dfs": "Depth-First Search",
         "gbfs": "Greedy Best First Search",
         "a_star": "A* (A-star)",
         "iddfs": "Iterarive Deepening Depth First Search",
