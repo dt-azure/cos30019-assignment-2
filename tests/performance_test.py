@@ -1,13 +1,26 @@
 import tracemalloc
 import time
-from search import parse_input
-from setup import Graph, GraphProblemMultiDest
-from iterative_deepening_a_star import ida_star_search
-from uninformed_search import bfs, dfs
-from informed_search import a_star_search
+from utils.setup import parse_input, GraphProblemMultiDest
+from algorithms.uninformed_search import bfs, dfs, iddfs_2
+from algorithms.informed_search import a_star_search, gbfs, ida_star_search
 import numpy as np
+import sys
 
-def test_algo(path):
+def print_results(algo, avg, current_avg, peak_avg, nodes_created):
+    print(f"{algo} avg execution time: {np.mean(avg) * 1000:.3f} ms")
+    print(f"{algo} avg memory allocated: {np.mean(current_avg)} bytes")
+    print(f"{algo} avg peak memory usage: {np.mean(peak_avg)} bytes")
+    print(f"{algo} nodes created: {nodes_created}")
+
+def print_results_bare(algo, avg, current_avg, peak_avg, nodes_created):
+    avg = round(np.mean(avg) * 1000, 3)
+    current_avg = np.mean(current_avg)
+    peak_avg = np.mean(peak_avg)
+
+    print(f"{algo} - {avg}, {current_avg}, {peak_avg}, {nodes_created}")
+
+
+def test_algo(path, clean_output = True):
     graph, coords, origin, goals = parse_input(path)
     problem = GraphProblemMultiDest(origin, goals, graph, coords)
 
@@ -15,11 +28,12 @@ def test_algo(path):
     avg = []
     current_avg = []
     peak_avg = []
+    nodes_created = 0
     for _ in range(50):
         tracemalloc.start()
 
         start = time.perf_counter()
-        bfs(problem)
+        _, _, nodes_created = bfs(problem)
         end = time.perf_counter()
 
         current, peak = tracemalloc.get_traced_memory()
@@ -29,18 +43,20 @@ def test_algo(path):
         current_avg.append(current)
         peak_avg.append(peak)
 
-    print(f"BFS avg execution time: {np.mean(avg) * 1000:.3f} ms")
-    print(f"BFS avg memory allocated: {np.mean(current_avg)} bytes")
-    print(f"BFS avg peak memory usage: {np.mean(peak_avg)} bytes")
+    if clean_output:
+        print_results("BFS", avg, current_avg, peak_avg, nodes_created)
+    else:
+        print_results_bare("BFS", avg, current_avg, peak_avg, nodes_created)
 
     avg = []
     current_avg = []
     peak_avg = []
+    nodes_created = 0
     for _ in range(50):
         tracemalloc.start()
 
         start = time.perf_counter()
-        dfs(problem)
+        _, _, nodes_created = dfs(problem)
         end = time.perf_counter()
 
         current, peak = tracemalloc.get_traced_memory()
@@ -50,18 +66,20 @@ def test_algo(path):
         current_avg.append(current)
         peak_avg.append(peak)
 
-    print(f"DFS avg execution time: {np.mean(avg) * 1000:.3f} ms")
-    print(f"DFS avg memory allocated: {np.mean(current_avg)} bytes")
-    print(f"DFS avg peak memory usage: {np.mean(peak_avg)} bytes")
+    if clean_output:
+        print_results("BFS", avg, current_avg, peak_avg, nodes_created)
+    else:
+        print_results_bare("DFS", avg, current_avg, peak_avg, nodes_created)
 
     avg = []
     current_avg = []
     peak_avg = []
+    nodes_created = 0
     for _ in range(50):
         tracemalloc.start()
 
         start = time.perf_counter()
-        ida_star_search(problem)
+        _, _, nodes_created = gbfs(problem)
         end = time.perf_counter()
 
         current, peak = tracemalloc.get_traced_memory()
@@ -71,18 +89,20 @@ def test_algo(path):
         current_avg.append(current)
         peak_avg.append(peak)
 
-    print(f"IDA* avg execution time: {np.mean(avg) * 1000:.3f} ms")
-    print(f"IDA* avg memory allocated: {np.mean(current_avg)} bytes")
-    print(f"IDA* avg peak memory usage: {np.mean(peak_avg)} bytes")
+    if clean_output:
+        print_results("GBFS", avg, current_avg, peak_avg, nodes_created)
+    else:
+        print_results_bare("GBFS", avg, current_avg, peak_avg, nodes_created)
 
     avg = []
     current_avg = []
     peak_avg = []
+    nodes_created = 0
     for _ in range(50):
         tracemalloc.start()
 
         start = time.perf_counter()
-        a_star_search(problem)
+        _, _, nodes_created = a_star_search(problem)
         end = time.perf_counter()
 
         current, peak = tracemalloc.get_traced_memory()
@@ -92,9 +112,59 @@ def test_algo(path):
         current_avg.append(current)
         peak_avg.append(peak)
 
-    print(f"A* avg execution time: {np.mean(avg) * 1000:.3f} ms")
-    print(f"A* avg memory allocated: {np.mean(current_avg)} bytes")
-    print(f"A* avg peak memory usage: {np.mean(peak_avg)} bytes")
+    if clean_output:
+        print_results("A*", avg, current_avg, peak_avg, nodes_created)
+    else:
+        print_results_bare("A*", avg, current_avg, peak_avg, nodes_created)
+
+    avg = []
+    current_avg = []
+    peak_avg = []
+    nodes_created = 0
+    for _ in range(50):
+        tracemalloc.start()
+
+        start = time.perf_counter()
+        _, _, nodes_created = iddfs_2(problem)
+        end = time.perf_counter()
+
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+
+        avg.append(end - start)
+        current_avg.append(current)
+        peak_avg.append(peak)
+
+    if clean_output:
+        print_results("IDDFS", avg, current_avg, peak_avg, nodes_created)
+    else:
+        print_results_bare("IDDFS", avg, current_avg, peak_avg, nodes_created)
+
+    avg = []
+    current_avg = []
+    peak_avg = []
+    nodes_created = 0
+    for _ in range(50):
+        tracemalloc.start()
+
+        start = time.perf_counter()
+        _, _, nodes_created = ida_star_search(problem)
+        end = time.perf_counter()
+
+        current, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+
+        avg.append(end - start)
+        current_avg.append(current)
+        peak_avg.append(peak)
+
+    if clean_output:
+        print_results("IDA*", avg, current_avg, peak_avg, nodes_created)
+    else:
+        print_results_bare("IDA*", avg, current_avg, peak_avg, nodes_created)
 
 if __name__ == "__main__":
-    test_algo('test_case_5.txt')
+    _, path, clean_output = sys.argv
+    clean_output = True if clean_output == 1 else False
+
+    test_algo(f"test_cases/{path}.txt", clean_output)
