@@ -165,8 +165,8 @@ def test_algo(path, clean_output = True):
         print_results_bare("IDA*", avg, current_avg, peak_avg, nodes_created)
 
 if __name__ == "__main__":
-    # _, path, clean_output = sys.argv
-    # clean_output = True if clean_output == 1 else False
+    _, path, clean_output = sys.argv
+    clean_output = True if clean_output == 1 else False
 
-    # test_algo(f"test_cases/{path}.txt", clean_output)
+    test_algo(f"test_cases/{path}.txt", clean_output)
     
