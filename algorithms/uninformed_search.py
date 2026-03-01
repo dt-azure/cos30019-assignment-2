@@ -217,7 +217,7 @@ def iddfs_2(problem):
                 temp = temp.parent
             return result, path[::-1], total_nodes_created
 
-    return None, None, Node.nodes_created
+    return None, None, total_nodes_created
 
 def depth_limited_dfs_2(problem, depth_limit):
     origin_node = Node(problem.initial)
