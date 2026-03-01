@@ -5,6 +5,7 @@ from algorithms.uninformed_search import bfs, dfs, iddfs_2
 from algorithms.informed_search import a_star_search, gbfs, ida_star_search
 import numpy as np
 import sys
+import random
 
 def print_results(algo, avg, current_avg, peak_avg, nodes_created):
     print(f"{algo} avg execution time: {np.mean(avg) * 1000:.3f} ms")
@@ -164,7 +165,8 @@ def test_algo(path, clean_output = True):
         print_results_bare("IDA*", avg, current_avg, peak_avg, nodes_created)
 
 if __name__ == "__main__":
-    _, path, clean_output = sys.argv
-    clean_output = True if clean_output == 1 else False
+    # _, path, clean_output = sys.argv
+    # clean_output = True if clean_output == 1 else False
 
-    test_algo(f"test_cases/{path}.txt", clean_output)
+    # test_algo(f"test_cases/{path}.txt", clean_output)
+    
